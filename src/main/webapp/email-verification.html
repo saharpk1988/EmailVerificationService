@@ -22,7 +22,7 @@
                 $.get('https://localhost:8443/my-first-ws/users/email-verification', {token: tokenValue})
                 .done(function (response) {
                     //The response that we get from our Rest API is an OperationalStatusModel object which will be converted to json
-                        if(response["operationalResult"]==="SUCCESS"){
+                        if(response["operationResult"]==="SUCCESS"){
                             //Now we check the response object and if it contains operationResult which value is equal to SUCCESS
                             $("#not-successful-result").attr("style", "display: none !important;" );
                             $("#successful-result").attr("style", "display: black !important;" );
