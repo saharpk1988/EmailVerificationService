@@ -19,7 +19,7 @@
 
             function verifyToken(tokenValue){
                 //send http get request with JQuery
-                $.get('http://ec2-18-159-107-118.eu-central-1.compute.amazonaws.com:8080/my-first-ws/users/email-verification', {token: tokenValue})
+                $.get('http://eec2-54-93-208-152.eu-central-1.compute.amazonaws.com:8080/my-first-ws/users/email-verification', {token: tokenValue})
                 .done(function (response) {
                     //The response that we get from our Rest API is an OperationalStatusModel object which will be converted to json
                     //Now we check the response object and if it contains operationResult which value is equal to SUCCESS
