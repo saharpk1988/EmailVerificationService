@@ -7,12 +7,38 @@
     <!--to be better viewable on mobile devices-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="JavaScript">
+        //It is needed to tell us when the document is loaded and
+        //javascript has been loaded and we can start using it. When the document is ready this function will be called.
+        $(document).ready(function (){
+            // Read url query string and extract the url parameters
+            var urlParams= new URLSearchParams(location.search);
+            if(urlParams.has('token')){
+                verifyToken(urlParams.get('token'));
+            }
+
+            function verifyToken(tokenValue){
+                //send http get request with JQuery
+                $.get('https://localhost:8443/my-first-ws/users/email-verification', {token: tokenValue})
+                .done(function (response) {
+                    //The response that we get from our Rest API is an OperationalStatusModel object which will be converted to json
+                        if(response["operationalResult"]==="SUCCESS"){
+                            //Now we check the response object and if it contains operationResult which value is equal to SUCCESS
+                            $("#not-successful-result").attr("style", "display: none !important;" );
+                            $("#successful-result").attr("style", "display: black !important;" );
+                        } else{
+                            $("#successful-result").attr("style", "display: none !important;");
+                            $("#not-successful-result").attr("style", "display: black !important;");
+                        }
+                });
+            }
+
+        });
+    </script>
 </head>
 <body>
     <!-- https://localhost:8443/email_verification_service/email-verification.html -->
     <div id="successful-result" style="display: none">Successful Verification</div>
     <div id="not-successful-result" style="display: none">Verification link has expired</div>
-
-
 </body>
 </html>
